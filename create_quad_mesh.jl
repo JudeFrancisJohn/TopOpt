@@ -8,6 +8,7 @@ function create_quad_mesh(points::Vector{Tuple{Float64, Float64}}, mesh_size::Fl
         error("Exactly four points must be provided.")
     end
 
+    
     gmsh.initialize()
     gmsh.option.setNumber("General.Terminal", 1)
     gmsh.model.add("quadModel")
@@ -36,7 +37,7 @@ function create_quad_mesh(points::Vector{Tuple{Float64, Float64}}, mesh_size::Fl
 
     # Choose a quadrilateral mesh algorithm
     # 1 = MeshAdapt, 5 = Delaunay, 6 = Frontal, 7 = BAMG, 8 = Frontal-Delaunay, 9 = Packing of Parallelograms
-    gmsh.option.setNumber("Mesh.Algorithm", 5)  # Frontal-Delaunay for quads
+    gmsh.option.setNumber("Mesh.Algorithm", 5)  # Delaunay for quads
 
     # Mesh generation
     gmsh.model.mesh.generate(2)
